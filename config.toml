@@ -1,0 +1,139 @@
+paginate = 6
+
+
+[params] 
+  [params.data]
+   phoneicon = "fa-phone"
+   number = "1-888-123-4567"
+   tel = "18475555555"
+   emailicon = "fa-envelope-o"
+   email = "contact@site.com" 
+   
+   flagicon = "famfamfam-flag-gb"
+   lang = "English"
+
+   location_icon = "glyphicon glyphicon-map-marker"
+   location_name = " 25, Navagio Zakynthos, Greece"
+   phone_icon = "glyphicon glyphicon-phone-alt"
+   phone_number = "Phone: 800 123 3456"
+   fax_icon = "fa fa-fax"
+   fax_number = "Fax: 800 123 3456" 
+   email_icon = "fa fa-envelope"
+   email_heading = "Email:"
+   mailto = "mailto:info@site.com"
+   email_name = "contact@site.com" 
+
+   facebook = "fa fa-facebook"
+   twitter = "fa fa-twitter"
+   google_plus = "fa fa-google-plus"
+   pinterest = "fa fa-pinterest"
+   linkedin = "fa fa-linkedin"
+   instagram = "fa fa-instagram"
+   youtube = "fa fa-youtube"
+
+  first_paragraph = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet."
+  second_paragraph = "Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip."
+
+
+
+[menu]
+
+ [[menu.main]]
+  name = "HOME"
+  url = "/"
+  weight = "100"
+
+ [[menu.main]]
+  name = "ROOMS"
+  url = "/rooms/"
+  weight = "200"
+
+ [[menu.main]]
+  name = "EVEVTS"
+  url = "/events/"
+  weight = "300" 
+
+ [[menu.main]]
+  name = "PLACE"
+  url = "/places/"
+  weight = "400"
+
+ [[menu.main]]
+  name = "CONTACT US"
+  url = "/contactus/"
+  weight = "500"
+
+ [[menu.main]]
+  name = "BLOG"
+  url = "/blog/"
+  weight = "600"  
+
+#footer menu
+
+ [[menu.footer]]
+  name = "Home"
+  url = "/"
+  weight = "100"
+
+ [[menu.footer]]
+  name = "Rooms"
+  url = "/rooms/"
+  weight = "200"
+
+ [[menu.footer]]
+  name = "Events"
+  url = "/events/"
+  weight = "300"
+
+ [[menu.footer]]
+  name = "Places"
+  url = "/places/"
+  weight = "400"
+
+ [[menu.footer]]
+  name = "Contact us"
+  url = "/contactus/"
+  weight = "500"  
+
+ [[menu.footer]]
+  name = "Blog"
+  url = "/blog/"
+  weight = "600"    
+
+#language
+
+ [[menu.language]]
+  name = "Ελληνικά"
+  langicon = "gr"
+  weight = "100"
+
+ [[menu.language]]
+  name = "Italiano"
+  langicon = "it"
+  weight = "200"
+
+ [[menu.language]]
+  name = "Deutsch"
+  langicon = "de"
+  weight = "300"
+
+ [[menu.language]]
+  name = "Français"
+  langicon = "fr"
+  weight = "400"
+
+ [[menu.language]]
+  name = "Español"
+  langicon = "es" 
+  weight = "500" 
+
+# Staticman
+#[[staticman]]
+ #allowedFields=  ['image', 'name', 'link', 'icon', 'date' , 'content']
+ #branch = master
+ #commitMessage = "Hey human, here is a new entry."
+ #filename = "entry{@timestamp}"
+ #format = toml
+ #moderation = true
+ #path = "data"
+ #requiredFields = ['image', 'name', 'link', 'icon', 'date' , 'content']
