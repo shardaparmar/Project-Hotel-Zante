@@ -1,0 +1,43 @@
+{{ define "main" }}
+
+  {{- if .Site.IsServer -}} {{ "<!-- layouts: tags/tag.html-->" | safeHTML }} {{- end -}}
+
+    <div id="smoothpage" class="wrapper">
+      <!-- =========== PAGE TITLE ========== -->
+      {{ partial "breadcrumb.html" . }}
+
+      <!-- =========== MAIN ========== -->
+      <main class="blog">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-9">
+  
+                <!-- ITEM -->
+                <article class="blog_list">
+                  <figure>
+                    <a href="{{ .RelPermalink }}" class="hover_effect h_link h_blue">
+                      <img src="{{ .Params.image }}" class="img-responsive" alt="Image">
+                    </a>
+                  </figure>
+                  <div class="details">
+                    <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+                    <div class="info">
+                      <span class="meta_part"><a href="#"><i class="fa fa-user"></i>{{ .Params.name }}</a></span>
+                      <span class="meta_part"><a href="#"><i class="fa fa-calendar"></i>                     
+                      </a></span>
+                      <span class="meta_part"><a href="#"><i class="fa fa-comment-o"></i>{{ .Params.comments }}</a></span>
+                    </div>
+                    <p>{{ .Params.text }}</p>
+                    <a class="button btn_blue " href="{{ .RelPermalink }}"><i class="fa fa-angle-double-right"></i> Read More </a>
+                  </div>
+                </article>
+            
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+  {{- if .Site.IsServer -}} {{ "<!-- end layouts: tags/tag.html-->" | safeHTML }} {{- end -}}
+
+{{ end }}

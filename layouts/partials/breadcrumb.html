@@ -1,0 +1,32 @@
+{{- if .Site.IsServer -}} {{ "<!-- layouts: partial/breadcrumb.html-->" | safeHTML }} {{- end -}}
+
+
+	<!-- =========== PAGE TITLE ========== -->
+	<div class="page_title gradient_overlay" style="background: url(/images/rooms/page_title_bg.jpg);">
+		<div class="container">
+			<div class="inner">
+				<div class="row">
+					<div class="col-md-6 col-sm-6">
+						<h1>{{ .Title }}</h1>
+						<ol class="breadcrumb">
+							<li><a href="/">Home</a></li>
+							{{ range (split .URL "/") }}
+								{{ if gt (len . ) 0 }}
+									<li><a href="/{{ . }}">{{ humanize (replace . "posts" "blog") }}</a></li>
+								{{ end }}
+							{{ end }}
+						</ol>
+					</div>
+					<div class="col-md-6 col-sm-6">
+						<div class="price {{ .Params.display }}">
+							<div class="inner">
+								€90 <span>per night</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{{- if .Site.IsServer -}} {{ "<!-- end layouts: partial/breadcrumb.html-->" | safeHTML }} {{- end -}}

@@ -1,0 +1,66 @@
+{{ define "main" }}
+  {{- if .Site.IsServer -}} {{ "<!-- layouts: events/list.html-->" | safeHTML }} {{- end -}}
+
+    <div id="smoothpage" class="wrapper">
+      
+      <!-- =========== PAGE TITLE ========== -->
+      {{ partial "breadcrumb.html" . }}
+      
+      <!-- ========== MAIN ========== -->
+      <main id="events_page">
+        <div class="container">
+					{{ range .Paginator.Pages.ByWeight }}
+						<!-- ITEM -->
+						<div class="item">
+							<div class="row">
+								<div class="col-lg-2 col-md-1">
+									<div class="time-from">
+										<div class="date"> {{ .Params.dates }}</div>
+										<div class="month"> {{ .Params.month }}</div>
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-6">
+									<div class="event-wrapper">
+										<h5> <a href="{{ .RelPermalink }}">{{ .Params.title }}</a></h5>
+										<div class="meta">
+											<div class="time"> <i class="{{ .Params.time_icon }}"></i>{{ dateFormat "15:04 AM" .Params.am | safeHTML }} - {{ dateFormat "15:04 PM" .Params.pm | safeHTML }}</div>
+											<div class="location"> <i class="{{ .Params.loc_icon }}"></i>{{ .Params.location }}</div>
+									 </div>
+										<div class="description">
+											<p>{{ .Params.text }}</p>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-5">
+									<div class="image">
+										<a href="{{ .RelPermalink }}" class="hover_effect h_blue h_link">
+											<img src="{{ .Params.image }}" class="img-responsive" alt="Image">
+											</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						{{ end }}     
+
+					<div class="a_center mt50">
+						<ul class="pagination mt50 mb0">
+              {{ $paginator := .Paginate .Pages }}
+              {{ if .Paginator.HasPrev }}
+               <li class="prev_pagination">
+                  <a href="{{ .Paginator.Prev.URL }}"><i class="fa fa-angle-left"></i></a>
+              </li>
+              {{ end }}
+              {{ if .Paginator.HasNext }}
+                <li class="next_pagination">
+                  <a href="{{ .Paginator.Next.URL }}"><i class="fa fa-angle-right"></i></a>
+                </li>
+              {{ end }}
+						</ul>			
+					</div>
+        </div>
+    	</main>
+      
+    </div>
+
+    {{- if .Site.IsServer -}} {{ "<!-- layouts: events/list.html-->" | safeHTML }} {{- end -}}
+{{ end }}

@@ -1,0 +1,55 @@
+{{- if .Site.IsServer -}} {{ "<!-- layouts: partial/blog-sidebar.html-->" | safeHTML }} {{- end -}}
+
+  <div class="col-md-3">
+    <div class="sidebar">
+      <aside class="widget">
+        <div class="search">
+          <form method="get" class="widget_search">
+            <input type="search" placeholder="Start Searching...">
+            <button class="search_btn" id="searchsubmit" type="submit">
+            <i class="fa fa-search"></i>
+            </button>
+          </form>
+        </div>
+      </aside>
+      <aside class="widget">
+        <h4>CATEGORIES</h4>
+        <ul class="categories">
+          
+            {{ range .Params.category }}
+              <li><a href="#">{{ .name }}<span class="num_posts">{{ .total }}</span></a></li>
+            {{ end }}
+
+           </ul>
+      </aside>
+      <aside class="widget">
+        <h4>Latest Posts</h4>
+        <div class="latest_posts">
+          <!-- ITEM -->
+          {{  range first 5 (where .Site.Pages "Type" "blog").ByWeight }} 
+            <article class="latest_post">
+              <figure>
+                <a href="{{ .RelPermalink }}" class="hover_effect h_link h_blue">
+                  <img src="{{ .Params.image }}" style=" width:120px" alt="Image">
+                </a>
+              </figure>
+              <div class="details">
+                <h6><a href="{{ .RelPermalink }}">{{ .Params.heading }}</a></h6>
+                <span><i class="fa fa-calendar"></i>{{ dateFormat "January 02, 2006" .Params.blog_date | safeHTML }}</span>
+              </div>
+            </article>
+          {{ end }}
+          </div>
+      </aside>
+      <aside class="widget">
+        <h4>Tags</h4>
+        <div class="tagcloud clearfix">
+          {{ range .Pages }}
+            <a href="#"><span class="tag">{{ .name }}</span><span class="num">{{ .total }}</span></a>
+          {{ end }}
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  {{- if .Site.IsServer -}} {{ "<!-- end layouts: partial/blog-sidebar.html-->" | safeHTML }} {{- end -}}

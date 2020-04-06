@@ -1,0 +1,196 @@
+{{ define "main" }}
+	{{- if .Site.IsServer -}} {{ "<!-- layout : rooms/single.html-->" | safeHTML }} {{- end  }}
+	
+		<!-- =========== PAGE TITLE ========== -->
+		{{ partial "breadcrumb.html" . }}
+
+		<!-- =========== MAIN ========== -->
+		<main id="room_page">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8">
+						<div class="slider">
+							<div id="slider-larg" class="owl-carousel image-gallery">
+								{{ range .Params.slider_larg }}
+								
+								<!-- ITEM -->
+								<div class="item lightbox-image-icon">
+									<a href="{{ .image }}" class="hover_effect h_lightbox h_blue">
+										<img class="img-responsive" src="{{ .image }}" alt="{{ .aalt }}">
+									</a>
+								</div>
+								{{ end }}
+							
+							</div>
+							<div id="thumbs" class="owl-carousel">
+								{{ range .Params.slider_larg }}
+									<!-- ITEM -->
+									<div class="item"><img class="img-responsive" src="{{ .image }}" alt="{{ .alt }}"></div>
+								{{ end }}
+							</div>
+						</div>
+						<div class="main_title mt50">
+							<h2>ABOUT HOTEL ZANTE</h2>
+						</div>
+						<p>{{ .Params.para1 }}</p>
+						<p>{{ .Params.para2 }}</p>
+						<p>{{ .Params.para3 }}</p>
+											
+						<div class="main_title t_style a_left s_title mt50">
+							<div class="c_inner">
+								<h2 class="c_title">ROOM SERVICES</h2>
+							</div>
+						</div>
+						<div class="room_facilitys_list">
+							<div class="all_facility_list">
+								<div class="col-sm-4 nopadding">
+									<ul class="list-unstyled">
+
+										{{ range .Params.services1 }}
+											<li><i class="{{ .icon }}"></i>{{ .name }}</li>
+										{{ end }}
+										
+								</ul>
+								</div>
+								<div class="col-sm-4 nopadding">
+									<ul class="list-unstyled">
+										{{ range .Params.services2 }}
+											<li class="{{ .class }}"><i class="{{ .icon }}"></i>{{ .name }}</li>
+										{{ end }}
+									</ul>
+								</div>
+								<div class="col-sm-4 nopadding_left">
+									<ul class="list-unstyled">
+										{{ range .Params.services3 }}
+											<li class="{{ .class }}"><i class="{{ .icon }}"></i>{{ .name }}</li>
+									{{ end }}
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="similar_rooms">
+							<div class="main_title t_style5 l_blue s_title a_left">
+								<div class="c_inner">
+									<h2 class="c_title">SIMILAR ROOMS</h2>
+								</div>
+							</div>
+							<div class="row">
+								{{  range first 3 (where .Site.Pages "Type" "rooms").ByWeight }} 
+									<div class="col-md-4">
+										<article>
+											<figure>
+												<a href="{{ .RelPermalink }}" class="hover_effect h_blue h_link"><img src="{{ .Params.image }}" alt="Image" class="img-responsive"></a>
+												<div class="price">{{ .Params.price }}<span> {{ .Params.time }}</span></div>
+												<figcaption>
+													<h4><a href="{{ .RelPermalink }}">{{ .Params.title }}</a></h4>
+												</figcaption>
+											</figure>
+										</article>
+									</div>
+								{{ end }}
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="sidebar">
+							<aside class="widget">
+								<div class="vbf">
+									<h2 class="form_title"><i class="fa fa-calendar"></i> BOOK ONLINE</h2>
+									<form id="booking-form" class="inner">
+										<div class="form-group">
+											<input class="form-control" name="booking-name" placeholder="Enter Your Name" type="text">
+										</div>
+										<div class="form-group">
+											<input class="form-control" name="booking-email" placeholder="Enter Your Email Address" type="email">
+										</div>
+										<div class="form-group">
+											<input class="form-control" name="booking-phone" placeholder="Enter Your Phone Number" type="text">
+										</div>
+										<div class="form-group">
+											<div class="form_select">
+												<select name="booking-roomtype" class="form-control" title="Select Room Type" data-header="Room Type" disabled>
+													<option value="Single Room" selected>Single Room</option>
+													<option value="Double Room">Double Room</option>
+													<option value="Deluxe Room">Deluxe Room</option>
+												</select>
+											</div>
+										</div>
+										<div class="form-group col-md-6 col-sm-6 col-xs-12 nopadding">
+											<div class="form_select">
+												<select name="booking-adults" class="form-control md_noborder_right" title="Adults" data-header="Adults">
+													<option value="0">0</option>
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+												</select>
+											</div>
+										</div>
+										<div class="form-group col-md-6 col-sm-6 col-xs-12 nopadding">
+											<div class="form_select">
+												<select name="booking-children" class="form-control" title="Children" data-header="Children">
+													<option value="0">0</option>
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+												</select>
+											</div>
+										</div>
+										<div class="form-group col-md-6 col-sm-6 col-xs-12 nopadding">
+											<div class="input-group">
+												<div class="form_date">
+													<input type="text" class="datepicker form-control md_noborder_right" name="booking-checkin" placeholder="Arrival Date" readonly>
+												</div>
+											</div>
+										</div>
+										<div class="form-group col-md-6 col-sm-6 col-xs-12 nopadding">
+											<div class="input-group">
+												<div class="form_date">
+													<input type="text" class="datepicker form-control" name="booking-checkout" placeholder="Departure Date" readonly>
+												</div>
+											</div>
+										</div>
+										<button class="button btn_lg btn_blue btn_full" type="submit">BOOK A ROOM NOW</button>
+										<div class="a_center mt10">
+											<a href="/" class="a_b_f">Advanced Booking Form</a>
+										</div>
+									</form>
+								</div>
+							</aside>
+							<aside class="widget">
+								<h4>NEED HELP?</h4>
+								<div class="help">
+									If you have any question please don't hesitate to contact us
+									<div class="phone"><i class="fa  {{ .Site.Params.data.phoneicon }}"></i><a href="tel:{{ .Site.Params.data.number }}">{{ .Site.Params.data.number }} </a></div>
+									<div class="email"><i class="fa {{ .Site.Params.data.emailicon }} "></i><a href="mailto:{{ .Site.Params.data.number }}">{{ .Site.Params.data.email }}</a> or use <a href="/"> contact form</a></div>
+								</div>
+							</aside>
+							<aside class="widget">
+								<h4>Latest Posts</h4>
+								<div class="latest_posts">
+
+									{{  range first 5 (where .Site.Pages "Type" "blog").ByWeight }} 
+										<article class="latest_post">
+											<figure>
+												<a href="{{ .RelPermalink }}" class="hover_effect h_link h_blue">
+													<img src="{{ .Params.image }}" style=" width:120px" alt="Image">
+												</a>
+											</figure>
+											<div class="details">
+												<h6><a href="{{ .RelPermalink }}">{{ .Title }}</a></h6>
+												<span><i class="fa fa-calendar"></i>{{ dateFormat "January 02, 2006" .Params.blog_date | safeHTML }}</span>
+											</div>
+										</article>
+									{{ end }}
+									
+								</div>
+							</aside>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+
+	{{- if .Site.IsServer -}} {{ "<!-- layout : rooms/single.html-->" | safeHTML }} {{- end }}
+{{ end }}

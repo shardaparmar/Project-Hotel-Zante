@@ -1,0 +1,29 @@
+{{- if .Site.IsServer -}} {{ "<!-- layouts: _default/baseof.html-->" | safeHTML }} {{- end -}}
+  
+  <!DOCTYPE html>
+  <html lang="en">
+
+    {{ partial "head.html" . }}
+
+    <body>
+      <div class="main-section">
+
+        {{ partial "top-menubar.html" . }}
+        
+        {{ partial "page-navigation.html" . }} 
+        
+        {{ block "header" . }} {{ end }}
+
+        {{ block "main" . }}  {{ end }}
+        
+        {{ partial "footer.html" . }}
+        
+      </div>
+
+      <!-- script section -->
+      {{ partial "script.html" . }}
+
+    </body>
+  </html>
+
+{{- if .Site.IsServer -}} {{ "<!-- end layouts: _default/baseof.html-->" | safeHTML }} {{- end -}}

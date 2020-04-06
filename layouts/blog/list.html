@@ -1,0 +1,120 @@
+{{ define "main" }}
+  {{- if .Site.IsServer -}} {{ "<!-- layouts: BLOG/list.html-->" | safeHTML }} {{- end -}}
+  
+    <div id="smoothpage" class="wrapper">
+
+      <!-- =========== PAGE TITLE ========== -->
+      {{ partial "breadcrumb.html" . }}
+      
+      <!-- =========== MAIN ========== -->
+      <main class="blog">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-9">
+              {{ range .Paginator.Pages.ByWeight }}
+                <!-- ITEM -->
+                <article class="blog_list">
+                  <figure>
+                    <a href="{{ .RelPermalink }}" class="hover_effect h_link h_blue">
+                      <img src="{{ .Params.image }}" class="img-responsive" alt="Image">
+                    </a>
+                  </figure>
+                  <div class="details">
+                    <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+                    <div class="info">
+                      <span class="meta_part"><a href="#"><i class="fa fa-user"></i>{{ .Params.name }}</a></span>
+                      <span class="meta_part"><a href="#"><i class="fa fa-calendar"></i>{{ dateFormat "January 02, 2006" .Params.blog_date | safeHTML }}</a></span>
+                      <span class="meta_part"><a href="#"><i class="fa fa-comment-o"></i>{{ .Params.comments }}</a></span>
+                      
+                    <p>{{ .Params.text }}</p>
+                    <a class="button btn_blue " href="{{ .RelPermalink }}"><i class="fa fa-angle-double-right"></i> Read More </a>
+                  </div>
+                </article>
+              {{ end }}
+              <nav>
+                <ul class="pagination mt50 mb0">
+                  {{ $paginator := .Paginate .Pages }}
+                  {{ if .Paginator.HasPrev }}
+                   <li class="prev_pagination">
+                      <a href="{{ .Paginator.Prev.URL }}"><i class="fa fa-angle-left"></i></a>
+                  </li>
+                  {{ end }}
+                  {{ if .Paginator.HasNext }}
+                    <li class="next_pagination">
+                      <a href="{{ .Paginator.Next.URL }}"><i class="fa fa-angle-right"></i></a>
+                    </li>
+                  {{ end }}
+                </ul>  
+              </nav>
+            </div>
+            <div class="col-md-3">
+              <div class="sidebar">
+                <aside class="widget">
+                  <div class="search">
+                    <form method="get" class="widget_search">
+                      <input type="search" placeholder="Start Searching...">
+                      <button class="search_btn" id="searchsubmit" type="submit">
+                      <i class="fa fa-search"></i>
+                      </button>
+                    </form>
+                  </div>
+                </aside>
+                <aside class="widget">
+                  <h4>CATEGORIES</h4>
+                  <ul class="categories" id="category">
+                    <li><a href="/rooms/"> Zante Hotel Rooms
+                      <span class="num_posts">{{ len (where .Site.RegularPages "Type" "==" "rooms") }}</span>
+                    </a></li>
+                    <li><a href="/events/">Events
+                      <span class="num_posts">{{ len (where .Site.RegularPages "Type" "==" "events") }}</span>
+                    </a></li>
+                    <li><a href="/places/"> Zante Hotel Places
+                      <span class="num_posts">{{ len (where .Site.RegularPages "Type" "==" "places") }}</span>
+                    </a></li>
+                    <li><a href="/blog/"> Zante Hotel Blogs List
+                      <span class="num_posts">{{ len (where .Site.RegularPages "Type" "==" "blog") }}</span>
+                    </a></li>
+                  </ul>
+                </aside>
+                <aside class="widget">
+                  <h4>Latest Posts</h4>
+                  <div class="latest_posts">
+                    <!-- ITEM -->
+                    {{  range first 5 (where .Site.Pages "Type" "blog").ByWeight }} 
+                      <article class="latest_post">
+                        <figure>
+                          <a href="{{ .RelPermalink }}" class="hover_effect h_link h_blue">
+                            <img src="{{ .Params.image }}" style=" width:120px" alt="Image">
+                          </a>
+                        </figure>
+                        <div class="details">
+                          <h6><a href="{{ .RelPermalink }}">{{ .Title }}</a></h6>
+                          <span><i class="fa fa-calendar"></i>{{ dateFormat "January 02, 2006" .Params.blog_date | safeHTML }}</span>
+                        </div>
+                      </article>
+                    {{ end }}
+                    </div>
+                </aside>
+                <aside class="widget">
+                  <h4>Tags</h4>
+                  <div class="tagcloud clearfix" id="tagcloud">
+                    {{ range .Pages }}
+                    {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
+                      
+                      <a href="/tags/{{ $name | urlize }}"><span class="tag">{{ $name | humanize }}</span>
+                      <span class="num">{{ $taxonomy.Count }}</span>
+                      </a>
+                    {{ end }}
+                    {{ end }}
+                  </div>
+                </aside>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+      
+    </div>  
+    
+  {{- if .Site.IsServer -}} {{ "<!-- layouts: BLOG/list.html-->" | safeHTML }} {{- end -}}
+{{ end }}

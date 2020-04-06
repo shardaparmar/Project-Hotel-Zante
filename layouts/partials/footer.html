@@ -1,0 +1,77 @@
+{{- if .Site.IsServer -}} {{ "<!-- layout : partial/footer.html-->" | safeHTML }} {{- end -}}
+
+	<!-- ========== FOOTER ========== -->
+	<footer>
+		<div class="inner">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3 col-sm-6 widget">
+						<div class="about">
+							<a href="/"><img class="logo" src="/images/logo.svg" height="32" alt="Logo"></a>
+							<p>{{ .Site.Params.data.first_paragraph }}</p>
+							<p>{{ .Site.Params.data.second_paragraph }}</p>
+						</div>	
+					</div>
+					<div class="col-md-3 col-sm-6 widget">
+						<h5>Latest News</h5>
+						<ul class="blog_posts">
+							{{  range first 3 (where .Site.Pages "Type" "blog").ByWeight }} 
+								<li><a href="{{ .RelPermalink }}">{{ .Title }}</a> <small>{{ dateFormat "January 02, 2006" .Params.blog_date | safeHTML }}</small></li>
+							{{ end }}
+						</ul>
+					</div>
+					<div class="col-md-3 col-sm-6 widget">
+						<h5>Useful Links</h5>
+						<ul class="useful_links">
+							{{ range .Site.Menus.footer }}
+								<li><a href="{{ .URL }}">{{ .Name }}</a></li>
+							{{ end }}
+						</ul>
+					</div>
+					<div class="col-md-3 col-sm-6 widget">
+						<h5>Contact Us</h5>
+						<address>
+							<ul class="address_details">
+								<li><i class="{{ .Site.Params.data.location_icon }}"></i>{{ .Site.Params.data.location_name }}</li>
+
+								<li><i class="{{ .Site.Params.data.phone_icon }}"></i> {{ .Site.Params.data.phone_number }} </li>
+
+								<li><i class="{{ .Site.Params.data.fax_icon }}"></i>{{ .Site.Params.data.fax_number }}</li>
+
+								<li><i class="{{ .Site.Params.data.email_icon }}"></i>{{ .Site.Params.data.email_heading }}<a href="{{ .Site.Params.data.mailto }}">{{ .Site.Params.data.email_name }}</a></li>
+							</ul>
+						</address>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="subfooter">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 col-sm-6">
+						<div class="copyrights">
+							Copyright 2017 <a href="/">Hotel Zante</a> All Rights Reserved.
+						</div>
+					</div>
+					<div class="col-md-6 col-sm-6">
+						<div class="social_media">
+							<a class="facebook" data-original-title="Facebook" data-toggle="tooltip" href="#"><i
+									class="{{ .Site.Params.data.facebook }}"></i></a>
+							<a class="twitter" data-original-title="Twitter" data-toggle="tooltip" href="#"><i
+									class="{{ .Site.Params.data.twitter }}"></i></a>
+							<a class="googleplus" data-original-title="Google Plus" data-toggle="tooltip" href="#"><i
+									class="{{ .Site.Params.data.google_plus }}"></i></a>
+							<a class="pinterest" data-original-title="Pinterest" data-toggle="tooltip" href="#"><i
+									class="{{ .Site.Params.data.pinterest }}"></i></a>
+							<a class="linkedin" data-original-title="Linkedin" data-toggle="tooltip" href="#"><i
+									class="{{ .Site.Params.data.linkedin }}"></i></a>
+							<a class="instagram" data-original-title="Instagram" data-toggle="tooltip" href="#"><i
+									class="{{ .Site.Params.data.instagram }}"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+{{- if .Site.IsServer -}} {{ "<!-- end layout : partial/footer.html-->" | safeHTML }} {{- end -}}

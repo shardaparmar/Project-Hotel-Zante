@@ -1,0 +1,256 @@
+{{ define "main" }}
+
+  {{- if .Site.IsServer -}} {{ "<!-- layouts: _default/home.html-->" | safeHTML }} {{- end -}}
+    <!-- ========== PRELOADER ========== -->
+    <div id="loading">
+      <div class="inner">
+        <div class="loading_effect">
+          <div class="object" id="object_one"></div>
+          <div class="object" id="object_two"></div>
+          <div class="object" id="object_three"></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="wrapper">
+      
+      <!-- ========== NAVIGATION ========== -->
+      {{ partial "header.html" . }}
+
+      <!-- ========== FAVORITE ROOMS ========== -->
+      <section class="white_bg" id="rooms">
+        <div class="container">
+          <div class="main_title mt_wave a_center">
+              <h2>OUR FAVORITE ROOMS</h2>
+          </div>
+          <p class="main_description a_center">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit.</p>
+
+          <div class="row"> 
+            {{  range first 3 (where .Pages "Type" "rooms").ByWeight }} 
+            <div class="col-md-4">
+							<article class="room">
+								<figure>
+									<div class="price">{{ .Params.price }} <span>{{ .Params.time }}</span></div>
+									<a class="hover_effect h_blue h_link" href="{{ .RelPermalink }}">
+										<img src="{{ .Params.image }}" class="img-responsive" alt="Image">
+									</a>
+									<figcaption>
+										<h4><a href="{{ .RelPermalink }}">{{ .Params.title }}</a></h4>
+										<span class="f_right"><a href="/" class="button btn_sm btn_blue">{{ .Params.btn_url }}</a></span>
+									</figcaption>
+								</figure>
+							</article>
+						</div>
+            {{ end }}
+          </div>
+          <div class="mt40 a_center">
+              <a class="button btn_sm btn_yellow" href="rooms-list.html">VIEW ROOMS LIST</a>
+          </div> 
+        </div>
+      </section>
+          
+      <!-- ========== FEATURES ========== -->
+      <section class="lightgrey_bg" id="features">
+        <div class="container">
+          <div class="main_title mt_wave a_center">
+            <h2>OUR AWESOME SERVICES</h2>
+          </div>
+          <p class="main_description a_center">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit.</p>          
+          <div class="row">
+            <div class="col-md-7">
+              <div data-slider-id="features" id="features_slider" class="owl-carousel">
+
+                {{ range .Params.Slider }} 
+                <div><img src="{{ .image }}" class="img-responsive" alt="{{ .alt }}"></div>
+                {{ end }}
+                
+            </div>
+            </div>
+            <div class="col-md-5">
+                <div class="owl-thumbs" data-slider-id="features">
+
+                  {{ range .Params.slider }}
+                    <div class="owl-thumb-item">
+                        <span class="media-left"><i class="{{ .icon }}"></i></span>
+                        <div class="media-body">
+                            <h5>{{ .name }}</h5>
+                            <p>{{ .text }}</p>
+                        </div>
+                    </div>
+                    {{ end }}
+                    
+                </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== BLOG ========== -->
+      <section id="blog">
+        <div class="container">
+          <div class="main_title mt_wave a_center">
+            <h2>LATEST NEWS & BLOGS</h2>
+          </div>
+          <p class="main_description a_center">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit.</p>
+          <div class="row">
+            {{  range first 4 (where .Pages "Type" "blog").ByWeight }} 
+              <!-- ITEM -->
+              <div class="col-md-6 col-sm-6">
+                <article class="blog_item">
+                  <div class="row">
+                    <div class="col-lg-5 col-md-12">
+                      <figure>
+                        <a href="{{ .RelPermalink }}" class="hover_effect h_blue h_link"><img src="{{ .Params.image }}" style="height: 200px;" class="img-responsive" alt="Image"></a>
+                      </figure>
+                    </div>
+                    <div class="col-lg-7 col-md-12">
+                      <div class="main">
+                        <h3><a href="{{ .RelPermalink }}">{{ .Params.heading }}</a></h3>
+                        <p>{{ .Params.content }}</p>
+                        <a href="{{ .RelPermalink }}" class="button btn_xs btn_blue">{{ .Params.btn_url }}</a>
+                        <div class="info">
+                          <i class="fa fa-user" aria-hidden="true"></i><a href="#">{{ .Params.name }}</a>
+                          <i class="fa fa-calendar" aria-hidden="true"></i><a href="#">{{ dateFormat "January 02, 2006" .Params.blog_date | safeHTML }}</a>
+                          <i class="fa fa-comment-o" aria-hidden="true"></i><a href="#">{{ .Params.comments }}</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </div>
+              {{ end }}
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== VIDEO ========== -->
+      <section id="video">
+        <div class="inner gradient_overlay">
+          <div class="container">
+            <div class="video_popup">
+              <a class="popup-vimeo" href="videos/hero_video.mp4"><i class="fa fa-play"></i></a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== TESTIMONIALS ========== -->
+      <section id="testimonials" class="lightgrey_bg">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="main_title mt_wave a_left">
+                <h2>OUR HAPPY CLIENTS</h2>
+              </div>
+              <p class="main_description">{{ .Params.main_description }}</p>
+            </div>
+            <div class="col-md-6">
+              <div id="testimonials_slider" class="owl-carousel">
+
+                {{ range .Site.Data }}
+                 <!-- ITEM -->
+                <div class="item">
+                    <img src="{{ .image }}" alt="Image">
+                    <div class="review_content">
+                        <p>{{ .content }}</p>
+                        <div class="review_rating">
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star{{ .star }}" aria-hidden="true"></i>
+                        </div>
+                        <div class="review_author">{{ .name }}, Greece</div>
+                    </div>
+                </div>
+                {{ end }}
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== PLACES ========== -->
+      <section id="places">
+        <div class="container">
+          <div class="main_title mt_wave a_center">
+              <h2>DISCOVER GREECE</h2>
+          </div>
+          <p class="main_description a_center">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit.</p>
+          <div class="row">
+            
+            {{ range first 7 (where .Pages "Type" "places").ByWeight }}
+              <!-- ITEM -->
+              <div class="col-md-{{ .Params.size }} col-sm-{{ .Params.size }}">
+                <div class="places_item">
+                  <a href="{{ .RelPermalink }}">
+                    <img src="{{ .Params.image }}" class="img-responsive" alt="Image">
+                    <div class="place_name">
+                      <h2>{{ .Title }}</h2>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            {{ end }}
+             
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== CONTACT ========== -->
+      <section class="white_bg" id="contact">
+        <div class="container">
+          <div class="main_title mt_wave a_center">
+              <h2>LOCATION - CONTACT US</h2>
+          </div>
+          <p class="main_description a_center">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit.</p>            
+          <div class="row">
+            <div class="col-md-6">
+              <div id="map-canvas"></div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="contact-items">
+                  
+                  {{ range .Params.address }}
+                  <div class="col-md-4 col-sm-4">
+                      <div class="contact-item">
+                          <i class="{{ .icon }}"></i>
+                          <h6>{{ .heading }}</h6>
+                      </div>
+                  </div>
+                  {{ end }}
+            
+                </div>
+              </div>
+              <form id="contact-form" name="contact-form">
+                <div class="form-group">
+                  <input class="form-control" name="name" placeholder="Your Name" type="text">
+                </div>
+                <div class="form-group">
+                  <input class="form-control" name="email" type="email" placeholder="Your Email Address">
+                </div>
+                <div class="form-group">
+                  <textarea class="form-control" name="message" placeholder="Your Message"></textarea>
+                </div>
+                <button class="button btn_lg btn_blue btn_full upper" type="submit"><i class="fa fa-location-arrow"></i>Send Message</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+          
+    </div>
+
+    <!-- ========== BACK TO TOP ========== -->
+    <div id="back_to_top">
+      <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </div>
+
+    <!-- ========== NOTIFICATION ========== -->
+    <div id="notification"></div>
+  
+  {{- if .Site.IsServer -}} {{ "<!-- layouts: _default/home.html-->" | safeHTML }} {{- end -}}
+
+{{ end }}

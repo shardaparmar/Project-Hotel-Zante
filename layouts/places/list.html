@@ -1,0 +1,35 @@
+{{ define "main" }}
+  {{- if .Site.IsServer -}} {{ "<!-- layouts: place/list.html-->" | safeHTML }} {{- end -}}
+
+    <div id="smoothpage" class="wrapper">
+
+      <!-- =========== PAGE TITLE ========== -->
+      {{ partial "breadcrumb.html" . }}
+
+      <!-- =========== MAIN ========== -->
+      <main id="places_page">
+        <div class="container">
+          <div class="row">
+            <div class="grid">
+
+              {{ range .Pages.ByWeight }}
+                <!-- ITEM -->
+                <div class="col-md-{{ .Params.size }} col-sm-{{ .Params.size }} col-xs-12 g_item">
+                  <div class="places_item">
+                    <a href="{{ .RelPermalink }}">
+                      <img src="{{ .Params.image }}" alt="Image">
+                      <div class="place_name">
+                        <h2>{{ .Title }}</h2>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              {{ end }}
+
+          </div>
+        </div>
+      </main>
+    </div>  
+s
+  {{- if .Site.IsServer -}} {{ "<!-- layouts: place/list.html-->" | safeHTML }} {{- end -}}
+{{ end }}  
